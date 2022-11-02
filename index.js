@@ -1,13 +1,8 @@
-const { readdir } = require("fs");
 const { Client } = require('discord.js');
+
 const client = new Client({});
 
-try {
-    client.config = require('./config/config.json');
-} catch (e) {
-    console.log("Config file not found. Please create a config.json file in the config folder.".red);
-    process.exit(1);
-}
+require('dotenv').config();
 
 process.on('unhandledRejection', error => {
     console.error('Unhandled promise rejection:', error);
@@ -21,7 +16,7 @@ process.on('uncaughtException', function (err) {
 client.on('ready', () => {
     console.log("\nBot Started!\n".rainbow.bold);
 
-    let guildChannel = client.guilds.cache.get(client.config.guild).channels.cache.get(client.config.channel)
+    let guildChannel = client.guilds.cache.get(process.env.GUILD).channels.cache.get(process.env.CHANNEL)
 
     setInterval(async () => {
 
@@ -48,4 +43,4 @@ client.on('ready', () => {
     }, 1000 * 60 * 60);
 });
 
-client.login(client.config.token);
+client.login(process.env.TOKEN);
