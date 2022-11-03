@@ -1,4 +1,6 @@
-const { Client } = require('discord.js');
+const {
+    Client
+} = require('discord.js');
 
 const client = new Client({
     intents: [],
@@ -16,7 +18,7 @@ process.on('uncaughtException', function (err) {
 });
 
 client.on('ready', () => {
-    console.log("\nBot Started!\n".rainbow.bold);
+    console.log("\nBot Started!\n");
 
     let guildChannel = client.guilds.cache.get(process.env.GUILD).channels.cache.get(process.env.CHANNEL)
 
